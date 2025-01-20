@@ -79,7 +79,7 @@ class TestSplitter(unittest.TestCase):
             ],
             new_nodes,
         )
-# TODO:// FIGURE OUT WHY THIS ONE FAILED AND FIX
+    #
     def test_delim_bold_double(self):
         node = TextNode(
             "This is text with a **bolded** word and **another**", TextType.TEXT
@@ -94,7 +94,7 @@ class TestSplitter(unittest.TestCase):
             ],
             new_nodes,
         )
-# TODO:// FIGURE OUT WHY THIS ONE FAILED AND FIX
+    #
     def test_delim_bold_multiword(self):
         node = TextNode(
             "This is text with a **bolded word** and **another**", TextType.TEXT
@@ -121,7 +121,7 @@ class TestSplitter(unittest.TestCase):
             ],
             new_nodes,
         )
-# TODO:// FIGURE OUT WHY THIS ONE FAILED AND FIX
+    #
     def test_delim_bold_and_italic(self):
         node = TextNode("**bold** and *italic*", TextType.TEXT)
         new_nodes = split_nodes_delimiter([node], "**", TextType.BOLD)
