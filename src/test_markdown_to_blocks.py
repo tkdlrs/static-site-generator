@@ -84,7 +84,7 @@ This is the same paragraph on a new line
         quote_type = block_to_block_type(quote_markdown)
         self.assertEqual(quote_type, "quote")
         #
-        code_markdown = "```\n<h1>html is totally code</h1>```"
+        code_markdown = "```\nhtml is totally code```"
         code_type = block_to_block_type(code_markdown)
         self.assertEqual(code_type, "code")
     

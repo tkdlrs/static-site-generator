@@ -7,20 +7,13 @@ def markdown_to_blocks(markdown):
     list_block_strings = []
     markdown_as_lines = markdown.split("\n\n")
     for line in markdown_as_lines:
-        if line.strip() == "":
+        line = line.strip()
+        if line == "":
             continue
 
-        list_block_strings.append(line.strip())
+        list_block_strings.append(line)
     #
     return list_block_strings
-
-# class BlockType(Enum):
-#    PARAGRAPH = "paragraph"
-#    HEADING = "heading"
-#    CODE = "code"
-#    QUOTE = "quote"
-#    UNORDERED_LIST = "unordered_list"
-#    ORDERED_LIST = "ordered_list"
     
 
 def block_to_block_type(line_of_markdown):
