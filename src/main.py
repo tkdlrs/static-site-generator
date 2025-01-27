@@ -2,7 +2,9 @@ import os
 import shutil
 #
 from textnode import TextNode, TextType
+from generate_page import generate_page
 
+# recursively pull over all the static assets
 def copy_directory_over(source_path, destination_path):
     #
     current_source_listing = os.listdir(source_path)
@@ -25,17 +27,12 @@ def copy_directory_over(source_path, destination_path):
 #
 def main():
     print("-----+ LET US BEGIN +-----")
-    # node = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
-    # print(node)
     current_directory = os.curdir
-    current_directory_listing = os.listdir(current_directory)
-    print(current_directory_listing, "current_directory_listing before")
-
-    # SECTION THAT IS MAKING/REMAKING THE 'public' DIRECTORY
+    # START SECTION ~THAT IS MAKING/REMAKING THE 'public' DIRECTORY
     public_directory_exists = os.path.exists("public")
     if public_directory_exists:
          # It does exist, so delete it. Then re-make it.
-        print('delete it them make it.')
+        print('Previous version existed. Deleting and re-creating.')
         # UNCOMMENT THIS LATER. IT STILL SCARES ME. I DON'T WANT TO DOING SOMETHING STUPID ON ACCIDENT.
         # delete it..
         shutil.rmtree("public")
@@ -43,22 +40,16 @@ def main():
         os.mkdir("public")
     else:
         os.mkdir("public")
-    
-    current_directory_listing = os.listdir(current_directory)
-    print(current_directory_listing, "current_directory_listing after")
     # END SECTION
-
-    # # SECTION THAT IS HANDING THE COPYING OF FILES.
-    static_directory_listing = ()
-    print(static_directory_listing, "static_directory_listing after")
-    
+    # START SECTION ~THAT IS HANDING THE COPYING OF FILES.    
     src_path = f"{current_directory}/static";
     dst_path = f"{current_directory}/public";
-
+    #
     copy_directory_over(src_path, dst_path)
-
+    # END SECTION
+    # START SECTION ~That generates the pages
+    generate_page("./content/index.md", './template.html', "./public/index.html")
     # END SECTION
     print("-----+ LET IT END +-----")
-
 #
 main()

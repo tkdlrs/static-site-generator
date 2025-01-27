@@ -29,7 +29,7 @@ def markdown_to_html_node(markdown):
     # Loop over each block:
     for block in markdown_blocks:
         # Determine the type of block, if no block throw an error.
-        current_block_type = block_to_block_type(block)      
+        current_block_type = block_to_block_type(block)
         if current_block_type not in hash_mapping:
             raise ValueError("Invalid block type")
         # Based on the type of block, create a new HTMLNode with the proper data
@@ -84,7 +84,6 @@ def handle_unordered_list(current_block):
         html_nodes.append(list_item)
     #
     unorder_list_parent.children = html_nodes
-    #
     return unorder_list_parent
 #
 def handle_quote(current_block):
@@ -118,7 +117,8 @@ def handle_code(current_block):
     # print(current_block, "current_block")
     code_element = ParentNode("code", [])
     code_kids = []
-    sections = current_block[3:-3]
+    last_back_tick = current_block.rfind("`")
+    sections = current_block[3:(last_back_tick - 3)]
     #
     current_blocks_text_nodes = text_to_textnodes(sections)
     for node in current_blocks_text_nodes:

@@ -19,10 +19,10 @@ def markdown_to_blocks(markdown):
 def block_to_block_type(line_of_markdown):
     hash_mapping = {
         r"^\d+\. " : "ordered_list",
-        r"^\*|\- ": "unordered_list",
+        r"^\* |\- ": "unordered_list",
         r"^>" : "quote",
         r"^#+ ": "heading",
-        r"^```": "code",
+        r"^```\n": "code",
     }
     for pattern in hash_mapping:
         if re.match(pattern, line_of_markdown):
