@@ -3,6 +3,7 @@ import shutil
 #
 from textnode import TextNode, TextType
 from generate_page import generate_page
+from generate_multiple_pages import generate_pages_recursive
 
 # recursively pull over all the static assets
 def copy_directory_over(source_path, destination_path):
@@ -48,7 +49,10 @@ def main():
     copy_directory_over(src_path, dst_path)
     # END SECTION
     # START SECTION ~That generates the pages
-    generate_page("./content/index.md", './template.html', "./public/index.html")
+    content_source = f"{current_directory}/content"
+    content_destination = f"{current_directory}/public"
+    #
+    generate_pages_recursive(content_source, "./template.html", content_destination)
     # END SECTION
     print("-----+ LET IT END +-----")
 #
