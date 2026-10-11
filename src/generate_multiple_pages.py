@@ -2,7 +2,7 @@ import os
 #
 from generate_page import generate_page
 #
-def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, base_path):
     #
     current_source_listing = os.listdir(dir_path_content)
     #
@@ -14,13 +14,13 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
         if os.path.isfile(current_item_to_pull_path):
           # This is a file. Pull it over
           page_name = current_path_to_pull_destination[:-2]
-          generate_page(current_item_to_pull_path, template_path, f"{page_name}html")
+          generate_page(current_item_to_pull_path, template_path, f"{page_name}html", base_path)
         else:
             # This is a directory.
             # Make it in the destination folder.
             os.mkdir(current_path_to_pull_destination)
             # Use the next source and next destination and recurse.
-            generate_pages_recursive(current_item_to_pull_path, template_path, current_path_to_pull_destination)   
+            generate_pages_recursive(current_item_to_pull_path, template_path, current_path_to_pull_destination, base_path)   
     return
 
 #

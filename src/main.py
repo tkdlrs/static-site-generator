@@ -1,3 +1,4 @@
+import sys
 import os
 import shutil
 #
@@ -28,31 +29,37 @@ def copy_directory_over(source_path, destination_path):
 #
 def main():
     print("-----+ LET US BEGIN +-----")
+    basepath = "/"
+    if len(sys.argv) >= 2:
+        basepath = sys.argv[1]
+    # 
+    print("basepath", basepath)
+    output_directory = "docs"
+    # 
     current_directory = os.curdir
     # START SECTION ~THAT IS MAKING/REMAKING THE 'public' DIRECTORY
-    public_directory_exists = os.path.exists("public")
+    public_directory_exists = os.path.exists(output_directory)
     if public_directory_exists:
          # It does exist, so delete it. Then re-make it.
         print('Previous version existed. Deleting and re-creating.')
-        # UNCOMMENT THIS LATER. IT STILL SCARES ME. I DON'T WANT TO DOING SOMETHING STUPID ON ACCIDENT.
         # delete it..
-        shutil.rmtree("public")
+        shutil.rmtree(output_directory)
         # remake it.
-        os.mkdir("public")
+        os.mkdir(output_directory)
     else:
-        os.mkdir("public")
+        os.mkdir(output_directory)
     # END SECTION
     # START SECTION ~THAT IS HANDING THE COPYING OF FILES.    
-    src_path = f"{current_directory}/static";
-    dst_path = f"{current_directory}/public";
+    src_path = f"{current_directory}/static"
+    dst_path = f"{current_directory}/{output_directory}"
     #
     copy_directory_over(src_path, dst_path)
     # END SECTION
     # START SECTION ~That generates the pages
     content_source = f"{current_directory}/content"
-    content_destination = f"{current_directory}/public"
+    content_destination = f"{current_directory}/{output_directory}"
     #
-    generate_pages_recursive(content_source, "./template.html", content_destination)
+    generate_pages_recursive(content_source, "./template.html", content_destination, basepath)
     # END SECTION
     print("-----+ LET IT END +-----")
 #

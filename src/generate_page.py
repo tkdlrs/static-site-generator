@@ -1,7 +1,7 @@
 from markdown_to_html_node import markdown_to_html_node
 from title_extractor import extract_title
 # 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, base_path):
    #
    print(f"Generating page from {from_path} to {dest_path} using {template_path}")
    
@@ -24,6 +24,8 @@ def generate_page(from_path, template_path, dest_path):
    # Update the HTML content from template to have the Markdown file 
    template_file_content = template_file_content.replace("{{ Title }}", title_is)
    template_file_content = template_file_content.replace("{{ Content }}", html_markup)
+   template_file_content = template_file_content.replace("href=\"/", f"href=\"{base_path}")
+   template_file_content = template_file_content.replace("src=\"/", f"src=\"{base_path}")
 
    # Write the new and updated HTML to a new file.
    with open(dest_path, 'w', encoding="utf-8") as dest_file:
